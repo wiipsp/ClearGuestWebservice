@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/jTDS"/>
+	</bean>
+
+<!-- 
+
+   JNDI conf in tomacat
+<Context path="/SSM" debug="0" docBase="D:\Eric\SSM\WebContent">
+	<Resource name="jdbc/jTDS" 
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/crystal?useUnicode=true&amp;characterEncoding=utf8&amp;connectionCollation=utf8_general_ci" 
+		username="root" 
+		password="Kobe1988"
+		maxIdle="20"
+		maxWait="1000" 
+		maxActive="50" />
+</Context>
+//connect to AMZ cloud database 
+url="jdbc:mysql://instance36195.db.xeround.com:3689/journey?useUnicode=true&amp;characterEncoding=utf8&amp;connectionCollation=utf8_general_ci" 
+username="kobe" 
+password="kobe123"
+		
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="/WEB-INF/config/jdbc.properties" />
+	</bean>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"   destroy-method="close">
+	         <property name="driverClass" value="${jdbc.driverClassName}"/>
+	         <property name="jdbcUrl" value="${jdbc.url}" />     
+	         <property name="user" value="${jdbc.username}" />
+	         <property name="password" value="${jdbc.password}" />
+	         
+	         <property name="minPoolSize"><value>1</value></property>
+	         <property name="maxPoolSize"><value>20</value></property>
+	         <property name="maxIdleTime"><value>1800</value></property>
+	         <property name="acquireIncrement"><value>2</value></property>
+	         <property name="maxStatements"><value>0</value></property>
+	         <property name="initialPoolSize"><value>2</value></property>
+	         <property name="idleConnectionTestPeriod"><value>1800</value></property>
+	         <property name="acquireRetryAttempts"><value>30</value></property>
+	         <property name="breakAfterAcquireFailure"><value>true</value></property>
+	         <property name="testConnectionOnCheckout"><value>false</value></property>
+	</bean>
+	 
+-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- mapper和resultmap配置路径--> 
+        <property name="mapperLocations">
+            <list>
+            	<value>classpath:org/projectx/webservice/mapper/*Mapper.xml</value>
+            	<value>classpath:org/projectx/webservice/mapper/*ResultMap.xml</value>
+            </list>
+        </property> 
+		<property name="configLocation" value="/WEB-INF/config/mybatis-config.xml" />
+	</bean>
+
+</beans>  

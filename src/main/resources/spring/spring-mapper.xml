@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.ncs.example.dao" /> <property
+		name="markerInterface" value="com.ncs.example.dao.SqlMapper"/> </bean>
+		
+		<bean id="testMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.ncs.example.mapper.TestMapper" />
+	</bean>
+
+	<bean id="userMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.ncs.example.mapper.UserMapper" />
+	</bean>
+
+	<bean id="ruleMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.ncs.example.mapper.RuleMapper" />
+	</bean>
+	-->
+	
+	<bean id="baseDAO" class="org.projectx.webservice.dao.BaseDAO">
+		<property name="sqlSessionFactory">
+			<ref bean="sqlSessionFactory"/>
+		</property>
+	</bean>
+	
+	<bean id="userDAO" class="org.projectx.webservice.dao.UserDAO" parent="baseDAO"></bean>
+	
+	<bean id="roleDAO" class="org.projectx.webservice.dao.RoleDAO" parent="baseDAO"></bean>
+	
+</beans>
