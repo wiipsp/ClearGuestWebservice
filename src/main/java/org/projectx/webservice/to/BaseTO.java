@@ -3,18 +3,41 @@ package org.projectx.webservice.to;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@MappedSuperclass
+@Inheritance(strategy=InheritanceType.JOINED)
 public class BaseTO implements Serializable{
 	private static final long serialVersionUID = 6357663834393139105L;
-	private String isDeleted;
-	private String createBy;
-	private Date createDt;
-	private String updateBy;
-	private Date updateDt;
-	private int versionNo;
-
+	
+	
 	public BaseTO() {
-		versionNo = 1;
 	}
+	
+	@Column(name = "IS_DELETED", nullable = false, length = 1)
+	private String isDeleted;
+	
+	@Column(name = "CREATE_BY", nullable = false, length = 15)
+	private String createBy;
+	
+	@Column(name = "CREATE_DT", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createDt;
+	
+	@Column(name = "UPDATE_BY", nullable = false, length = 15)
+	private String updateBy;
+	
+	@Column(name = "UPDATE_DT", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updateDt;
+	
+	@Column(name = "VERSION_NO", nullable = false)
+	private int versionNo;
 
 	public String getIsDeleted() {
 		return isDeleted;

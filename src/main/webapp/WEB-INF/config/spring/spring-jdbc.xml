@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+ http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/config/application.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/jTDS"/>
+	</bean>
+<!-- 
+
+   JNDI conf in tomacat
+<Context path="/SSM" debug="0" docBase="D:\Eric\SSM\WebContent">
+	<Resource name="jdbc/jTDS" 
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/crystal?useUnicode=true&amp;characterEncoding=utf8&amp;connectionCollation=utf8_general_ci" 
+		username="root" 
+		password="Kobe1988"
+		maxIdle="20"
+		maxWait="1000" 
+		maxActive="50" />
+</Context>
+//connect to AMZ cloud database 
+url="jdbc:mysql://instance36195.db.xeround.com:3689/journey?useUnicode=true&amp;characterEncoding=utf8&amp;connectionCollation=utf8_general_ci" 
+username="kobe" 
+password="kobe123"
+		
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="/WEB-INF/config/jdbc.properties" />
+	</bean>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"   destroy-method="close">
+	         <property name="driverClass" value="${jdbc.driverClassName}"/>
+	         <property name="jdbcUrl" value="${jdbc.url}" />     
+	         <property name="user" value="${jdbc.username}" />
+	         <property name="password" value="${jdbc.password}" />
+	         
+	         <property name="minPoolSize"><value>1</value></property>
+	         <property name="maxPoolSize"><value>20</value></property>
+	         <property name="maxIdleTime"><value>1800</value></property>
+	         <property name="acquireIncrement"><value>2</value></property>
+	         <property name="maxStatements"><value>0</value></property>
+	         <property name="initialPoolSize"><value>2</value></property>
+	         <property name="idleConnectionTestPeriod"><value>1800</value></property>
+	         <property name="acquireRetryAttempts"><value>30</value></property>
+	         <property name="breakAfterAcquireFailure"><value>true</value></property>
+	         <property name="testConnectionOnCheckout"><value>false</value></property>
+	</bean>
+	 
+-->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+		<property name="dataSource" ref="dataSource"/>
+    	<property name="packagesToScan" value="org.projectx.webservice.*" />
+    	<!--<property name="packagesToScan">
+			<list>
+				<value>com.picnic.*</value>
+			</list>
+		</property> -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.query.substitutions">${hibernate.query.substitutions}</prop>
+                <prop key="hibernate.default_batch_fetch_size">${hibernate.default_batch_fetch_size}</prop>
+                <prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
+                <prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+                <prop key="hibernate.bytecode.use_reflection_optimizer">${hibernate.bytecode.use_reflection_optimizer}</prop>
+
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+                <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+                <prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
+                <prop key="net.sf.ehcache.configurationResourceName">${net.sf.ehcache.configurationResourceName}</prop>
+                <prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop>
+            </props>
+        </property>
+  	</bean>
+
+</beans>  

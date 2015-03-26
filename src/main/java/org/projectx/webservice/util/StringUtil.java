@@ -9,7 +9,8 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-public class StringUtil {
+import org.apache.commons.lang.StringUtils;
+public class StringUtil extends StringUtils {
 
 
     // Automatically generated variable: INT_39
@@ -253,10 +254,6 @@ public class StringUtil {
     public static boolean isNullOrEmpty (String[] data) {
         return data == null || data.length == 0;
     }
-    
-    public static boolean isBlank(String data){
-    	return data.trim().length() == 0;
-    }
 
     /**
      * Returns true if the data is null or blank string (with only whitespaces).
@@ -463,7 +460,7 @@ public class StringUtil {
 
         // Split the string with the key as the delimiter
         StringBuffer sb = new StringBuffer();
-        if (!isNullOrBlank(str)) {
+        if (StringUtils.isNotEmpty(str)) {
             String[] parts = StringUtil.split(str, key);
             sb.append(parts[0]);
             for (int i = 1; i < parts.length; i++) {
@@ -1247,7 +1244,7 @@ public class StringUtil {
      * @return the parameter map.
      */
     public static Map<String, String> getParamMap (String paramStr) {
-        if (isNullOrBlank(paramStr)) {
+        if (StringUtil.isEmpty(paramStr)) {
             return null;
         }
         Map<String, String> map = new HashMap<String, String>();

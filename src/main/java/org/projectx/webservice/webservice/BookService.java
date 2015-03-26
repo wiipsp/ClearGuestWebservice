@@ -1,4 +1,4 @@
-package org.projectx.webservice.service;
+package org.projectx.webservice.webservice;
 
 import java.util.HashMap;
 import java.util.List;

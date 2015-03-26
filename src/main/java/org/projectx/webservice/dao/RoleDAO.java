@@ -1,11 +1,7 @@
 package org.projectx.webservice.dao;
 
-import org.projectx.webservice.mapper.RoleMapper;
+import org.projectx.webservice.to.RoleTO;
 
-public class RoleDAO extends BaseDAO implements RoleMapper{
-
-	public Integer getRoleCount() {
-		return getSqlSession().getMapper(RoleMapper.class).getRoleCount();
-	}
+public interface RoleDAO extends BaseDAO<RoleTO, String> {
 
 }

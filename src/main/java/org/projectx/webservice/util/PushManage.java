@@ -15,9 +15,9 @@ public class PushManage {
       
     public String PushManageXml(InputStream is) throws JDOMException {  
   
-        String returnStr = ""; // 反回Servlet字符�? 
-        String toName = ""; // �?��者微信号  
-        String fromName = ""; // 发�?方帐号（�?��OpenID�? 
+        String returnStr = ""; // 反回Servlet字符�? 
+        String toName = ""; // �?��者微信号  
+        String fromName = ""; // 发�?方帐号（�?��OpenID�? 
         String type = ""; // 请求类型  
         String con = ""; // 消息内容(接收)  
           
@@ -48,7 +48,7 @@ public class PushManage {
             //异常  
         }  
           
-        returnStr = getBackXMLTypeText(toName,fromName,"输入�?"+con);  
+        returnStr = getBackXMLTypeText(toName,fromName,"输入�?"+con);  
           
         return returnStr;  
     }  
