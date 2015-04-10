@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
+import org.projectx.webservice.push.PushtoAPP;
 import org.projectx.webservice.service.ClearGuestPwdService;
 import org.projectx.webservice.to.ClearGuestPwdTO;
 import org.projectx.webservice.webservice.ClearguestService;
@@ -22,6 +23,10 @@ public class ClearguestServiceImpl implements ClearguestService {
 	@Autowired
 	@Qualifier("clearGuestPwdService")
 	private ClearGuestPwdService clearGuestPwdService;
+	
+	@Autowired
+	@Qualifier("pushtoAPP")
+	private PushtoAPP pushtoAPP;
 	
 	// 子路径  
     @Path("pushClearguestPwd")
@@ -40,6 +45,13 @@ public class ClearguestServiceImpl implements ClearguestService {
 	public String getLatestClearguestPwd() {
     	ClearGuestPwdTO clearGuestPwdTO = clearGuestPwdService.getLatestClearguestPwd();
     	return clearGuestPwdTO.getPassword();
+	}
+    
+ // 子路径  
+    @Path("notificationLatestClearguestPwd")
+    @GET  
+	public String notificationLatestClearguestPwd() {
+    	return pushtoAPP.notificationPwdToApp();
 	}
 
 }

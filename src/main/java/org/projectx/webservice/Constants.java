@@ -13,4 +13,8 @@ public class Constants {
     public static String FLAG_N = "N";
 	public static String FLAG_Y = "Y";
 	
+	public static final String PUSH_APP_ID = "vSlF5VVrfrAhFuxNCkfDv1";
+	public static final String PUSH_APP_KEY = "BBgDzeNiFy5N5t81KJ1zW5";
+	public static final String PUSH_APP_MASTER = "naZT52hYjN8ykHFS8EHxx3";
+	public static final String PUSH_APP_HOST = null;
 }

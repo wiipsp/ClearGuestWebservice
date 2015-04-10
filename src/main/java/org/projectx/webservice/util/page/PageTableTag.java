@@ -9,12 +9,9 @@ import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
+import org.projectx.webservice.util.JSONUtil;
 import org.projectx.webservice.util.StringUtil;
 import org.projectx.webservice.util.TagUtil;
-
-import net.sf.json.JSONObject;
-
-
 
 public class PageTableTag extends BodyTagSupport{
 	private static final long serialVersionUID = -4599673312748367438L;
@@ -57,11 +54,10 @@ public class PageTableTag extends BodyTagSupport{
 
 	@Override
 	public int doEndTag() throws JspException {
-		JSONObject jsonObj = JSONObject.fromObject(pageModel);
 		StringBuilder content = new StringBuilder("\t\n");
 		content.append("<script language=\"javascript\">\n")
 			    .append("$(document).ready(function(){\n")
-			    .append("var page = new Page('" + id + "', '" + action + "', " + jsonObj + ", '" + contextPath + "');\n")
+			    .append("var page = new Page('" + id + "', '" + action + "', " + JSONUtil.toJSON(pageModel) + ", '" + contextPath + "');\n")
 			    .append("page.myPageCreatePageTitle = function(){\n\t")
 			    .append("var pageObj = this;\n\t")
 			    .append("var tr = $(\"<tr></tr>\");\n\t");
